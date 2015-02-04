@@ -131,6 +131,36 @@ _clone() {
         COMPREPLY=( $(compgen -W "${opts}" -X '!*'${cur}'*') )
 }
 
+_tabc() {
+  NAME=$1; if [ -z "$NAME" ]; then NAME="Default"; fi
+  # if you have trouble with this, change
+  # "Default" to the name of your default theme
+  echo -e "\033]50;SetProfile=$NAME\a"
+}
+
+
+
+_colorssh() {
+    tab_reset() {
+        echo "P"
+        NAME="Solarized Dark"
+        _tabc "Solarized Dark"
+    }
+    if [[ -n "$ITERM_SESSION_ID" ]]; then
+        trap tab_reset INT EXIT # Hmmm..
+        if [[ "$*" =~ "production*" ]]; then
+            _tabc Production
+        elif [[ "$*" =~ "staging*" ]]; then
+            _tabc Staging
+        else
+            _tabc SSH
+        fi
+    fi
+    ssh $*
+    tab_reset
+}
+alias ssh="_colorssh"
+
 complete -F _root root
 complete -F _base base
 complete -F _clone clone
