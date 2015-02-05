@@ -142,7 +142,6 @@ _tabc() {
 
 _colorssh() {
     tab_reset() {
-        echo "P"
         NAME="Solarized Dark"
         _tabc "Solarized Dark"
     }
