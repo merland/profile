@@ -27,7 +27,7 @@ fi
 alias ls='ls -GF'
 alias ll="ls -la"
 alias less='less -R'
-alias hg='history | grep $@'
+alias hig='history | grep $@'
 
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
